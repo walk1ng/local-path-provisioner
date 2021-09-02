@@ -59,6 +59,13 @@ spec:
       labels:
         app: local-path-provisioner
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/exclusive"
+          operator: "Equal"
+          value: "mdw"
+          effect: "NoSchedule"
+      nodeSelector:
+        rdp.paas.zoomlion.com/exclusive: mdw
       serviceAccountName: local-path-provisioner-service-account
       containers:
         - name: local-path-provisioner
@@ -150,6 +157,13 @@ data:
     metadata:
       name: helper-pod
     spec:
+      tolerations:
+        - key: "node-role.kubernetes.io/exclusive"
+          operator: "Equal"
+          value: "mdw"
+          effect: "NoSchedule"
+      nodeSelector:
+        rdp.paas.zoomlion.com/exclusive: mdw
       containers:
       - name: helper-pod
         image: busybox
